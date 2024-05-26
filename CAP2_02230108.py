@@ -4,6 +4,10 @@
 # 02230108
 #######################################
 # Reference 
+# https://www.youtube.com/watch?v=xTh-ln2XhgU
+# https://www.youtube.com/watch?v=2TrDIbwasw8
+# https://www.w3schools.com/python/python_classes.asp
+
 
 
 import os
