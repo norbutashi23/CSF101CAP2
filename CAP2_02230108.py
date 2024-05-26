@@ -31,18 +31,18 @@ class BankAccount:
         self.typo_ac2 = typo_ac2
         self.remaining_money = remaining_money
 
-    def deposit(self, teru_gamchi):
+    def deposit(self, how_much):
         # adding money to the account
-        self.remaining_money += teru_gamchi
-        print(f"Added Nu {teru_gamchi}. New balance is Nu {self.remaining_money}.")
+        self.remaining_money += how_much
+        print(f"Added Nu {how_much}. New balance is Nu {self.remaining_money}.")
 
-    def withdraw(self, teru_gamchi):
+    def withdraw(self, how_much):
         # Takes money out of the account if there is enough amount
-        if teru_gamchi > self.remaining_money:
+        if how_much > self.remaining_money:
             print("Not enough money.")
         else:
-            self.remaining_money -= teru_gamchi
-            print(f"Withdrew Nu {teru_gamchi}. New balance is Nu {self.remaining_money}.")
+            self.remaining_money -= how_much
+            print(f"Withdrew Nu {how_much}. New balance is Nu {self.remaining_money}.")
 
     def check_balance(self):
         print(f"Account balance is Nu {self.remaining_money}.")
@@ -108,20 +108,20 @@ class Bank:
         else:
             print("Account not found.")
 
-    def transfer_money(self, from_account, to_bank_id_number, teru_gamchi):
+    def transfer_money(self, from_account, to_bank_id_number, how_much):
         # Sends money to other account
         to_account = self.accounts.get(to_bank_id_number)
         if not to_account:
             print("There is no receiving account.")
             return
-        if from_account.remaining_money < teru_gamchi:
+        if from_account.remaining_money < how_much:
             print("Not enough money.")
             return
 
-        from_account.withdraw(teru_gamchi)
-        to_account.deposit(teru_gamchi)
+        from_account.withdraw(how_much)
+        to_account.deposit(how_much)
         self.save_accounts()
-        print(f"Transferred Nu {teru_gamchi} to account {to_bank_id_number}.")
+        print(f"Transferred Nu {how_much} to account {to_bank_id_number}.")
 
 def main():
     # main function given
@@ -155,17 +155,17 @@ def main():
                     if action == '1':
                         account.check_balance()
                     elif action == '2':
-                        teru_gamchi = float(input("Put in the amount you want to deposit: "))
-                        account.deposit(teru_gamchi)
+                        how_much = float(input("Put in the amount you want to deposit: "))
+                        account.deposit(how_much)
                         bank.save_accounts()
                     elif action == '3':
-                        teru_gamchi = float(input("Enter the amount you want to withdraw: "))
-                        account.withdraw(teru_gamchi)
+                        how_much = float(input("Enter the amount you want to withdraw: "))
+                        account.withdraw(how_much)
                         bank.save_accounts()
                     elif action == '4':
                         to_bank_id_number = input("Type in the account number to make the transfer: ")
-                        teru_gamchi = float(input("Enter your amount to transfer: "))
-                        bank.transfer_money(account, to_bank_id_number, teru_gamchi)
+                        how_much = float(input("Enter your amount to transfer: "))
+                        bank.transfer_money(account, to_bank_id_number, how_much)
                     elif action == '5':
                         break
                     else:
@@ -180,4 +180,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
+
